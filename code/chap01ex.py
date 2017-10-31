@@ -13,14 +13,14 @@ import sys
 import nsfg
 import thinkstats2
 
-
-def main(script):
-    """Tests the functions in this module.
-
-    script: string script name
-    """
-    print('%s: All tests passed.' % script)
-
+def main():
+    resp = nsfg.ReadFemResp()
+    preg = nsfg.ReadFemPreg()
+    preg_map = nsfg.MakePregMap(preg)
+    for id, pregnum_value in resp.pregnum.items():
+        caseid = resp.caseid[id]
+        assert(pregnum_value == len(preg_map[caseid]))
+    print('Success')
 
 if __name__ == '__main__':
-    main(*sys.argv)
+    main()
